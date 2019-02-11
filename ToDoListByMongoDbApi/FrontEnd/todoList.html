@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Proje - Yapilacaklar Listesi</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app" class="container">
+        <h2>Kategori</h2>
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" v-for="item in categories" class="list-group-item list-group-item-action" @click="changedCategory(item.title)">
+                        {{item.title}} 
+                    </a>
+
+
+                </div>
+                <input type="text" class="form-control" v-model="categoryName" v-on:keyup.enter="addCategory()" placeholder="Yeni kategori">
+            </div>
+            <div class="col-md-9">
+                <h2>{{ activeCategory.title }}</h2>
+                <form class="row">
+                    <div class="col-10">
+                        <input type="text" v-model="Description" class="form-control">
+                    </div>
+                    <div class="col-2">
+                        <button v-on:click="SaveToDo()" class="btn btn-success">Kaydet</button>
+                    </div>
+                </form>
+                <h2 v-show="!activeCategoryToDoList.length==0">Devam Edenler</h2>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table">
+                            <tr v-for="item in activeCategoryToDoList">
+                                <td>
+                                        <a href="#" v-on:click="UpdateToDo(item.id)" class="btn btn-sm btn-success">
+                                                <i class="fa fa-check"></i>
+                                            </a>
+                                </td>
+                                <td class="text-left w-100">
+                                        {{item.description}}
+                                </td>
+
+                            </tr>
+                        </table>                      
+                    </div>
+
+                </div>
+
+                <h2 v-if="!activeCategoryCompletedList.length==0">Bitenler</h2>
+                <div class="row">
+                        <div class="col-12">
+                            <table class="table">
+                                <tr v-for="item in activeCategoryCompletedList">
+                                    <td>
+                                            <a href="#" class="btn btn-sm btn-secondary">
+                                                    <i class="fa fa-check"></i>
+                                                </a>
+                                    </td>
+                                    <td class="text-left w-100">
+                                            {{item.description}}
+                                    </td>
+    
+                                </tr>
+                            </table>                      
+                        </div>
+    
+                    </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="appData.js"></script>
+    
+
+</body>
+
+</html>
